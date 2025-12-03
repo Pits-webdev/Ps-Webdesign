@@ -1,0 +1,38 @@
+---
+import { filterButtons } from "../../data/data";
+---
+
+<section class="bg-white py-16">
+   <div class="max-w-7xl mx-auto px-4">
+      <!-- header -->
+      <div
+         class="flex flex-col sm:flex-row justify-between md:items-center mb-10"
+      >
+         <h2 class="text-5xl textzin mb-4 sm:mb-0 uppercase">
+            SHOP bY <br /> ESSENTIALS
+         </h2>
+         <div class="flex space-x-4 overflow-x-scroll scrollbar-hide">
+            {
+               filterButtons.map((btn) => (
+                  <button
+                     class={`${btn.isActive ? "bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-700"} cursor-pointer md:text-xl px-4 py-2 rounded-full hover:bg-zinc-900 hover:text-white uppercase transition-all duration-200 ease-in group text-nowrap`}
+                  >
+                     {btn.name}{" "}
+                     <sub
+                        class={`${btn.isActive ? "text-zinc-50 " : "text-zinc-800"} text-xs group-hover:text-zinc-50 ml-0.5`}
+                     >
+                        {btn.count}
+                     </sub>
+                  </button>
+               ))
+            }
+         </div>
+      </div>
+
+      <!-- Product grid -->
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+         {"1:07.10"}
+      </div>
+   </div>
+</section>

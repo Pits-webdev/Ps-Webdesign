@@ -1,0 +1,156 @@
+---
+import Menu from "../assets/svg/menu.svg";
+import Search from "../assets/svg/search.svg";
+import ShoppingBag from "../assets/svg/shopping-bag.svg";
+import ShoppingCart from "../assets/svg/shopping-cart.svg";
+import User from "../assets/svg/user.svg";
+---
+
+<header class="w-full h-full relative z-50">
+   <div class="bg-zinc-900 text-white text-center text-xs py-2 mb-4">
+      Sign up and get 50% off for all new season collections!
+   </div>
+   <nav
+      id="nav"
+      class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between border border-zinc-200 rounded-2xl p-4"
+   >
+      <div class="flex items-center justify-between gap-2">
+         <ShoppingBag />
+         <span
+            class="text-2xl tracking-tight text-zinc-900 flex item-center gap-2"
+            >Belandras <sub>®</sub></span
+         >
+      </div>
+
+      <ul
+         class="hidden absolute bg-zinc-50 py-4 px-8 left-0 top-32 w-full h-[calc(100vh-128px)] md:flex flex-col text-2xl font-medium text-zinc-500 space-y-8 md:static md:w-fit md:h-fit md:items-center md:bg-transparent md:flex-row md:space-x-6 md:text-base md:space-y-0 md:py-0 md:px-0"
+      >
+         <li>
+            <a
+               href="/"
+               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
+               >Women</a
+            >
+         </li>
+         <li>
+            <a
+               href="/about"
+               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
+               >Men</a
+            >
+         </li>
+         <li>
+            <a
+               href="/contact"
+               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
+               >Kids</a
+            >
+         </li>
+         <li>
+            <a
+               href="/contact"
+               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
+               >Sale</a
+            >
+         </li>
+         <li>
+            <a
+               href="/contact"
+               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
+               >Discover</a
+            >
+         </li>
+      </ul>
+
+      <div class="flex items-center space-x-6">
+         <button class="text-zinc-600">
+            <Search />
+         </button>
+         <button class="text-zinc-600"> <User /></button>
+         <button class="text-zinc-600 relative">
+            <span
+               class="bg-red-500 text-white size-6 rounded-full absolute -top-2.5 -right-2.5"
+               >0</span
+            >
+            <ShoppingCart />
+         </button>
+         <button
+            id="menu-btn"
+            class="text-zinc-600 transition-colors md:hidden"
+         >
+            <Menu />
+         </button>
+      </div>
+   </nav>
+</header>
+
+<script>
+   class MobileNavigation {
+      // TypeScript Definitionen
+      navElement: HTMLElement | null;
+      menuBtn: HTMLElement | null;
+      isOpen: boolean;
+
+      constructor(selector: string) {
+         this.navElement = document.querySelector(selector);
+         // Optional chaining (?.) ist hier super
+         this.menuBtn = this.navElement?.querySelector("#menu-btn") || null;
+
+         this.isOpen = false;
+
+         this.init();
+         this.initResizeListener(); // Besserer Name
+      }
+
+      init() {
+         if (!this.navElement || !this.menuBtn) {
+            console.warn("Navigation oder Button nicht gefunden");
+            return;
+         }
+
+         // Button Klick
+         this.menuBtn.addEventListener("click", () => this.toggle());
+      }
+
+      // Haupt-Methode zum Umschalten
+      toggle() {
+         if (this.isOpen) {
+            this.close();
+         } else {
+            this.open();
+         }
+      }
+
+      open() {
+         this.isOpen = true;
+         this.navElement?.classList.add("is-open"); // CSS Klasse setzen
+         console.log("Menü geöffnet");
+      }
+
+      close() {
+         this.isOpen = false;
+         this.navElement?.classList.remove("is-open"); // CSS Klasse entfernen
+         console.log("Menü geschlossen");
+      }
+
+      // Resize & Orientation zusammengefasst
+      // Meistens reicht "resize", da eine Drehung auch ein Resize auslöst.
+      initResizeListener() {
+         window.addEventListener("resize", () => {
+            // Logik: Wenn wir auf Desktop-Größe sind (> 768px)
+            // UND das Menü noch offen ist -> Dann schließen wir es zwangsweise.
+            if (window.innerWidth >= 768 && this.isOpen) {
+               this.close();
+            }
+         });
+
+         // Optional: Orientation Change explizit (oft nicht mehr nötig wegen resize)
+         window.addEventListener("orientationchange", () => {
+            // Beim Drehen sicherheitshalber schließen
+            this.close();
+         });
+      }
+   }
+
+   const mainNav = new MobileNavigation("#nav");
+</script>
