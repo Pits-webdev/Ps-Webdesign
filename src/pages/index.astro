@@ -1,16 +1,24 @@
 ---
-import Placeholder from "../components/Placeholder.astro";
+import PageLoader from "../components/PageLoader.astro";
+import AboutSection from "../components/Start/AboutSection.astro";
 import HeroSection from "../components/Start/HeroSection.astro";
+import ServicesSection from "../components/Start/ServicesSection.astro";
 import ShopEssentialsSection from "../components/Start/ShopEssentialsSection.astro";
 import TaglineSection from "../components/Start/TaglineSection.astro";
+import ThreeBackground from "../components/Start/ThreeBackground.astro";
+import ControlBar from "../components/ui/ControlBar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Start">
-	<main>
+	<PageLoader />
+	<ThreeBackground />
+	<main class="">
 		<HeroSection />
-		<TaglineSection />
-		<ShopEssentialsSection />
-		<Placeholder />
+
+		<AboutSection />
+		<ServicesSection />
+
+		<ControlBar />
 	</main>
 </Layout>

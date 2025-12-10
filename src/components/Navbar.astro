@@ -1,120 +1,170 @@
 ---
-import Menu from "../assets/svg/menu.svg";
-import Search from "../assets/svg/search.svg";
-import ShoppingBag from "../assets/svg/shopping-bag.svg";
-import ShoppingCart from "../assets/svg/shopping-cart.svg";
-import User from "../assets/svg/user.svg";
+// Header.astro
+import Logo from "../assets/svg/ps-logo.svg";
 ---
 
-<header class="w-full h-full relative z-50">
-   <div class="bg-zinc-900 text-white text-center text-xs py-2 mb-4">
-      Sign up and get 50% off for all new season collections!
-   </div>
+<header
+   class="fixed top-0 left-0 w-full h-16 bg-background/90 text-foreground backdrop-blur-md z-50"
+>
    <nav
       id="nav"
-      class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between border border-zinc-200 rounded-2xl p-4"
+      class="container mx-auto px-4 h-full flex justify-between items-center relative"
    >
-      <div class="flex items-center justify-between gap-2">
-         <ShoppingBag />
-         <span
-            class="text-2xl tracking-tight text-zinc-900 flex item-center gap-2"
-            >Belandras <sub>®</sub></span
+      <!-- 1. LOGO -->
+      <a href="/" class="flex gap-2 items-end text-secondary">
+         <Logo height={26} />
+         <span class="text-foreground flex items-center leading-0 text-[12px]"
+            >web <span class="w-px h-3 bg-foreground block mx-1"
+            ></span>dev</span
          >
-      </div>
+      </a>
 
-      <ul
-         class="hidden absolute bg-zinc-50 py-4 px-8 left-0 top-32 w-full h-[calc(100vh-128px)] md:flex flex-col text-2xl font-medium text-zinc-500 space-y-8 md:static md:w-fit md:h-fit md:items-center md:bg-transparent md:flex-row md:space-x-6 md:text-base md:space-y-0 md:py-0 md:px-0"
-      >
+      <!-- 2. NAVIGATION LISTE -->
+      <!-- 
+         Desktop: Tailwind Klassen (hidden lg:flex ...)
+         Mobile Open: Wird unten im <style> Block gesteuert
+      -->
+      <ul id="nav-list" data-state="closed" class="flex items-center gap-6">
          <li>
             <a
                href="/"
-               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
-               >Women</a
+               class="text-sm font-medium hover:text-primary transition-colors"
+               >Home</a
             >
          </li>
          <li>
             <a
                href="/about"
-               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
-               >Men</a
+               class="text-sm font-medium hover:text-primary transition-colors"
+               >About</a
+            >
+         </li>
+         <li>
+            <a
+               href="/services"
+               class="text-sm font-medium hover:text-primary transition-colors"
+               >Services</a
             >
          </li>
          <li>
             <a
                href="/contact"
-               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
-               >Kids</a
+               class="bg-[#fef4b8] text-amber-800 font-semibold rounded-full px-4 py-2 text-sm hover:shadow-md transition-all"
             >
+               Contact
+            </a>
          </li>
-         <li>
-            <a
-               href="/contact"
-               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
-               >Sale</a
+         <li class="hidden">
+            <!-- 3. MOBILE TOGGLE BUTTON -->
+            <button
+               id="nav-toggle"
+               class="lg:hidden p-2 text-foreground hover:text-primary focus:outline-none z-50"
+               aria-label="Menü umschalten"
+               aria-expanded="false"
             >
-         </li>
-         <li>
-            <a
-               href="/contact"
-               class="border px-2 py-1 rounded-full hover:text-zinc-900 border-transparent hover:border-zinc-400 transition-all"
-               >Discover</a
-            >
+               <!-- Hamburger Icon -->
+               <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+               >
+                  <path
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+               </svg>
+            </button>
          </li>
       </ul>
-
-      <div class="flex items-center space-x-6">
-         <button class="text-zinc-600">
-            <Search />
-         </button>
-         <button class="text-zinc-600"> <User /></button>
-         <button class="text-zinc-600 relative">
-            <span
-               class="bg-red-500 text-white size-6 rounded-full absolute -top-2.5 -right-2.5"
-               >0</span
-            >
-            <ShoppingCart />
-         </button>
-         <button
-            id="menu-btn"
-            class="text-zinc-600 transition-colors md:hidden"
-         >
-            <Menu />
-         </button>
-      </div>
    </nav>
 </header>
 
+<!-- 
+   CSS STYLE BLOCK (Scoped)
+   Hier definieren wir den "Open"-Zustand mit Standard-CSS.
+   Das verhindert Fehler mit @apply und hält das HTML sauber.
+-->
+<style>
+   /* Style nur anwenden, wenn data-state="open" ist */
+   #nav-list[data-state="open"] {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 4rem; /* 16 * 0.25rem (h-16 des Headers) */
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 4rem);
+
+      /* Design analog zu deinen Tailwind Wünschen */
+      background-color: #d97706; /* amber-600 */
+      color: #fef4b8; /* Dein helles Gelb */
+
+      padding: 1.5rem;
+      gap: 0.5rem;
+      overflow-y: auto;
+      z-index: 40;
+   }
+
+   /* Styling der List-Items im mobilen Zustand */
+   #nav-list[data-state="open"] li {
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Zarter Trennstrich */
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+   }
+
+   /* Styling der Links im mobilen Zustand */
+   #nav-list[data-state="open"] a {
+      font-size: 1.125rem; /* text-lg */
+      display: block;
+      width: 100%;
+   }
+
+   /* Button im Mobile Menu anpassen */
+   #nav-list[data-state="open"] a[href*="contact"] {
+      background-color: #fef4b8;
+      color: #d97706;
+      text-align: center;
+      margin-top: 1rem;
+   }
+</style>
+
+<!-- 
+   JAVASCRIPT LOGIK
+-->
 <script>
    class MobileNavigation {
-      // TypeScript Definitionen
+      // Definition der Variablen für TypeScript/Klarheit
       navElement: HTMLElement | null;
       menuBtn: HTMLElement | null;
-      isOpen: boolean;
+      menuList: HTMLElement | null;
+      state: string;
 
       constructor(selector: string) {
          this.navElement = document.querySelector(selector);
-         // Optional chaining (?.) ist hier super
-         this.menuBtn = this.navElement?.querySelector("#menu-btn") || null;
+         this.menuBtn = this.navElement?.querySelector("#nav-toggle") || null;
+         this.menuList = this.navElement?.querySelector("#nav-list") || null;
 
-         this.isOpen = false;
+         // Initialen Status sicher auslesen (Standard: "closed")
+         this.state = this.menuList?.getAttribute("data-state") || "closed";
 
-         this.init();
-         this.initResizeListener(); // Besserer Name
+         // Starten nur wenn alles da ist
+         if (this.navElement && this.menuBtn && this.menuList) {
+            this.init();
+            this.initResizeListener();
+         }
       }
 
       init() {
-         if (!this.navElement || !this.menuBtn) {
-            console.warn("Navigation oder Button nicht gefunden");
-            return;
-         }
-
-         // Button Klick
-         this.menuBtn.addEventListener("click", () => this.toggle());
+         // Click Listener
+         this.menuBtn?.addEventListener("click", () => this.toggle());
       }
 
-      // Haupt-Methode zum Umschalten
       toggle() {
-         if (this.isOpen) {
+         if (this.state === "open") {
             this.close();
          } else {
             this.open();
@@ -122,35 +172,32 @@ import User from "../assets/svg/user.svg";
       }
 
       open() {
-         this.isOpen = true;
-         this.navElement?.classList.add("is-open"); // CSS Klasse setzen
+         this.state = "open";
+         this.menuList?.setAttribute("data-state", "open");
+         this.menuBtn?.setAttribute("aria-expanded", "true");
+
+         // Optional: Icon ändern oder Klasse am Button für Animation
          console.log("Menü geöffnet");
       }
 
       close() {
-         this.isOpen = false;
-         this.navElement?.classList.remove("is-open"); // CSS Klasse entfernen
+         this.state = "closed";
+         this.menuList?.setAttribute("data-state", "closed");
+         this.menuBtn?.setAttribute("aria-expanded", "false");
+
          console.log("Menü geschlossen");
       }
 
-      // Resize & Orientation zusammengefasst
-      // Meistens reicht "resize", da eine Drehung auch ein Resize auslöst.
       initResizeListener() {
          window.addEventListener("resize", () => {
-            // Logik: Wenn wir auf Desktop-Größe sind (> 768px)
-            // UND das Menü noch offen ist -> Dann schließen wir es zwangsweise.
-            if (window.innerWidth >= 768 && this.isOpen) {
+            // Wenn Fenster größer als 1024px (lg) und Menü offen ist -> schließen
+            if (window.innerWidth >= 1024 && this.state === "open") {
                this.close();
             }
-         });
-
-         // Optional: Orientation Change explizit (oft nicht mehr nötig wegen resize)
-         window.addEventListener("orientationchange", () => {
-            // Beim Drehen sicherheitshalber schließen
-            this.close();
          });
       }
    }
 
-   const mainNav = new MobileNavigation("#nav");
+   // Klasse initialisieren
+   new MobileNavigation("#nav");
 </script>

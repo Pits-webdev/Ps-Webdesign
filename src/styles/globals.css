@@ -1,9 +1,20 @@
 @import "tailwindcss";
+@import "./lenis.css";
 @import './brand.css';
 
-@theme {
-  /* Wir definieren hier eine neue Utility-Klasse "bg-noise" */
-  --background-image-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+ html, body {
+    -ms-overflow-style: none;  /* IE und Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  
+  /* Chrome, Safari, Opera */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+body{
+  @apply overflow-x-clip bg-background text-foreground font-SpaceGrotesk;
 }
 
 
@@ -27,10 +38,11 @@ button {
     @apply cursor-pointer ;
 } 
 
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* IE und Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;             /* Chrome, Safari, Opera */
-}
+#nav-list[data-state="open"] {
+      @apply flex fixed top-16 left-0 w-full h-[calc(100vh-4rem)] 
+            overflow-auto bg-amber-600 text-[#fef4b8] flex-col gap-1 p-4
+            /* Styling der Listen-Items im mobilen Zustand */
+            [&_li]:w-full [&_li]:border-b [&_li]:border-gray-100 
+            [&_li]:py-4 [&_a]:text-lg;
+   } 
+

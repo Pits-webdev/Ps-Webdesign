@@ -1,113 +1,51 @@
 ---
-import { Image } from "astro:assets";
-import ArrowDown from "../../assets/svg/arrow-down.svg";
-import Mail from "../../assets/svg/mail.svg";
 
-//TODO - button move /* 36:15 */
 ---
 
-<section class="mt-12">
-   <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <div class="flex flex-col space-y-4">
-         <div
-            class="bg-zinc-900 h-[480px] flex flex-col justify-between rounded-3xl p-8 shadow-sm"
+<section id="hero">
+   <div class="w-full h-full">
+      <div class="first w-full h-screen grid place-content-center">
+         <h1
+            class="text-6xl text-balance text-center max-w-6xl mx-auto font-BebasNeue"
          >
-            <h2 class="text-6xl text-white">
-               For <code>arrow</code> Everyone <br />but <br />not anyone
+            Discover Quantum, revolutionizing the packaging industry with
+            unparalleled elasticity and durability. Where traditional wraps
+            falter, Quantum stands firm.
+         </h1>
+      </div>
+
+      <div class="second w-full h-full pt-[470px] pb-[280px]">
+         <div class="w-full max-h-[776px]">
+            <h2 class="text-6xl font-BebasNeue text-center mb-96">
+               Strong film performance
             </h2>
-            <p class="text-zinc-300">
-               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-               Similique sapiente, quae ipsam sit ad ex laborum eligendi
-               laudantium cum facere. Eos provident totam quidem sint?
-            </p>
-         </div>
-         <div class="grid grid-cols-2 gap-4">
-            <div
-               class="relative h-[230px] bg-zinc-300 rounded-3xl flex items-end p-3 overflow-clip"
-            >
-               <div
-                  class="absolute inset-0 bg-[url(../assets/images/port-1.webp)] bg-contain bg-no-repeat bg-top flex items-end p-3"
-               >
-                  <span
-                     class="bg-zinc-900/70 backdrop-blur-sm text-white font-semibold tracking-wide z-20 py-1 px-2 rounded-full"
-                  >
-                     #NewArrival
-                  </span>
-               </div>
-            </div>
 
-            <div
-               class="relative h-[230px] bg-[#586d64] rounded-3xl flex items-end p-3 overflow-clip"
+            <h3
+               class="text-3xl font-BebasNeue w-1/2 text-balance text-center mb-20 mx-auto"
             >
-               <div
-                  class="absolute inset-0 bg-[url(../assets/images/port-1.webp)] bg-contain bg-no-repeat bg-top flex items-end p-3"
-               >
-                  <span
-                     class="bg-zinc-900/70 backdrop-blur-sm text-white font-semibold tracking-wide z-20 py-1 px-2 rounded-full"
-                  >
-                     #NewArrival
-                  </span>
-               </div>
+               In the world of packaging, every detail counts. Quantum emerges
+               at the intersection of innovation and necessity, designed for
+               those who seek the best.
+            </h3>
+
+            <div class="cards flex gap-14 w-[67.5%] mx-auto text-primary">
+               <p class="l">
+                  Traditional wraps have set a standard; Quantum redefines it.
+                  Every inch is engineered for optimal performance, embracing
+                  products with unmatched resilience. While many films promise
+                  protection, Quantum delivers it consistently, adapting to
+                  diverse challenges with grace and tenacity.
+               </p>
+
+               <p class="r">
+                  Beyond just wrapping, Quantum is a testament to advanced
+                  material science. Its properties, meticulously enhanced, work
+                  in harmony to safeguard every package. From the initial
+                  stretch to long-term retention, experience the peace of mind
+                  that only Quantum's superior design can provide.
+               </p>
             </div>
          </div>
-      </div>
-
-      <div
-         class="col_right relative hidden lg:inline-flex bg-zinc-300 rounded-3xl overflow-clip"
-      >
-         <div
-            class="w-full h-full flex items-center justify-center text-zinc-500"
-         >
-            Image Placholder
-         </div>
-
-         <div
-            class="shop_now absolute bottom-80 right-45 size-20 flex items-center justify-center bg-zinc-800/80 backdrop-blur-md text-zinc-300 uppercase rounded-full border font-bold border-zinc-100"
-         >
-            Shop<br />Now
-         </div>
-
-         <div class="absolute bottom-4 right-4 flex space-x-3">
-            <button
-               class="group bg-white/90 backdrop-blur-xs cursor-pointer flex items-center gap-10 text-zinc-900 text-xs uppercase pl-3 pr-2 rounded-full hover:bg-zinc-900 hover:text-zinc-50 transition-all duration-200 ease- font-semibold py-1"
-            >
-               Learn more
-               <span
-                  class="size-7 p-1 bg-zinc-800 text-white group-hover:bg-zinc-50 group-hover:text-zinc-800 rounded-full flex items-center justify-center"
-               >
-                  <ArrowDown />
-               </span>
-            </button>
-
-            <button
-               class="border border-zinc-50 group backdrop-blur-xs cursor-pointer flex items-center gap-10 text-zinc-50 text-xs uppercase pl-3 pr-2 rounded-full hover:bg-zinc-900 hover:text-zinc-50 transition-all duration-200 ease- font-semibold py-1"
-            >
-               Contact Us
-               <span
-                  class="size-7 p-1 bg-zinc-800 text-white group-hover:bg-zinc-50 group-hover:text-zinc-800 rounded-full flex items-center justify-center"
-               >
-                  <Mail />
-               </span>
-            </button>
-         </div>
-      </div>
-
-      <div
-         class="w-full md:hidden bg-[#586b3f] text-white uppercase p-4 font-bold flex items-center justify-center rounded-full"
-      >
-         Shop Now
       </div>
    </div>
 </section>
-
-<script>
-   //gsap animations can be added here in the future
-   import { gsap } from "gsap";
-
-   import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-   gsap.registerPlugin(ScrollTrigger);
-
-   const colRight = document.querySelector(".col_right") as HTMLElement;
-   const shopNow = document.querySelector(".shop_now ") as HTMLElement;
-</script>

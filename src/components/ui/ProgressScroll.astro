@@ -1,0 +1,114 @@
+---
+// Wir generieren 40 Balken (Ticks)
+const ticks = Array.from({ length: 50 });
+---
+
+<div class="w-full h-full">
+   <div
+      class="w-fit h-full flex flex-col gap-2.5 border border-white/10 bg-black/50 px-12 py-3 rounded-full"
+   >
+      <!-- txt -->
+      <div
+         class="w-full flex items-center justify-between text-[#6e6e6e] text-[8px]"
+      >
+         <span class="leading-0">0 %</span>
+         <span class="leading-0">50 %</span>
+         <span class="leading-0">100 %</span>
+      </div>
+      <!-- progressbar -->
+      <div class="w-fit flex items-end gap-[3px] h-5">
+         {
+            ticks.map(() => (
+               <span class="block progress-tick w-px bg-primary/50 rounded-sm origin-bottom will-change-transform" />
+            ))
+         }
+      </div>
+   </div>
+</div>
+
+<script>
+   import { gsap } from "gsap";
+   import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+   gsap.registerPlugin(ScrollTrigger);
+
+   const ticks = document.querySelectorAll(".progress-tick");
+   const totalTicks = ticks.length;
+
+   // Konfiguration
+   const minHeight = 6;
+   const maxHeight = 16;
+
+   // --- 1. Die Logik auslagern ---
+   // Damit wir sie beim Scrollen UND beim Laden aufrufen können
+   function updateWave(progress: number) {
+      // Sicherstellen, dass progress zwischen 0 und 1 bleibt
+      const safeProgress = Math.max(0, Math.min(1, progress));
+
+      // Position berechnen (0 bis 39)
+      const currentPos = safeProgress * (totalTicks - 1);
+
+      ticks.forEach((tick, i) => {
+         const distance = Math.abs(currentPos - i);
+
+         // Die Kurve: Wie breit ist der "Berg"? (4.0 ist die Breite)
+         let intensity = Math.max(0, 1.0 - distance / 4.0);
+
+         // Weichere Kanten
+         intensity = gsap.utils.clamp(0, 1, intensity);
+
+         const height = minHeight + (maxHeight - minHeight) * intensity;
+
+         // Farbe interpolieren: Von Dunkel (700) zu Gold (400)
+         // Wir nutzen hier GSAP's eingebaute Farb-Interpolation, wenn möglich,
+         // oder setzen einfache Werte.
+         const color = intensity > 0.5 ? "#266a98" : "#c8c8c8"; // amber-400 vs amber-700  "#fbbf24" : "#b45309"
+         const opacity = 0.5 + 0.5 * intensity;
+
+         gsap.to(tick, {
+            height: height,
+            backgroundColor: color,
+            opacity: opacity,
+
+            duration: 0.07, // 0.2 Sekunden Animation
+            ease: "power2.out", // Weiches Abbremsen am Ende
+            overwrite: true, // WICHTIG: Stoppt sofort die alte Animation, wenn eine neue kommt
+         });
+      });
+   }
+
+   // --- 2. ScrollTrigger erstellen ---
+   ScrollTrigger.create({
+      trigger: "body", // Wir hören auf den ganzen Body
+      start: "top top", // Startet ganz oben
+      end: "bottom bottom", // Endet ganz unten
+      scrub: 0, // Direktes Feedback
+      onUpdate: (self) => {
+         updateWave(self.progress);
+      },
+   });
+
+   // --- 3. Initialisierung (Fix für Problem 1 & 2) ---
+   // Wir berechnen den Start-Status sofort, falls der User schon in der Mitte ist (Refresh)
+   function init() {
+      const scrollY = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      // Verhindern von Division durch 0
+      const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+
+      updateWave(progress);
+   }
+
+   // Einmal sofort ausführen
+   init();
+
+   // Und einmal, wenn GSAP bereit ist (sicher ist sicher)
+   ScrollTrigger.refresh();
+</script>
+
+<style>
+   /* Optional: Ein leuchtender Effekt für den goldenen Look */
+   .progress-tick {
+      box-shadow: 0 0 5px #0051ff33;
+   }
+</style>

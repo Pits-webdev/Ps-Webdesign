@@ -1,0 +1,17 @@
+---
+import AudioControl from "./AudioControl.astro";
+import ProgressScroll from "./ProgressScroll.astro";
+---
+
+<div
+   class="fixed bottom-0 left-0 w-full p-4 z-50 flex justify-between items-end"
+>
+   <div class="w-1/2 text-sm text-balance leading-5">
+      <ProgressScroll />
+   </div>
+
+   <div class="w-1/2 flex justify-end">
+      <!-- Der Button -->
+      <AudioControl />
+   </div>
+</div>
