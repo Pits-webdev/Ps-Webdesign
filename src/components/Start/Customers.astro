@@ -1,0 +1,24 @@
+---
+import Marquee from "@components/ui/Marquee.astro";
+---
+
+<section class="py-40">
+   <div class="w-container space-y-40">
+      <div class="l grid grid-cols-[auto_1fr]">
+         <div>
+            <span class="text-primary text-sm">001</span>
+            <p>Unsere Kunden</p>
+         </div>
+         <div class="w-full flex justify-end">
+            <h2 class="text-8xl">
+               <span class="text-7xl inline-flex">&copy;</span> 2019-26
+            </h2>
+         </div>
+      </div>
+
+      <div class="space-y-8">
+         <Marquee />
+         <Marquee direction="toRight" />
+      </div>
+   </div>
+</section>

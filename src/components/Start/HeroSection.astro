@@ -1,51 +1,43 @@
 ---
-
+import ArrowLongRight from "@assets/svg/arrow-long-right.svg";
+import Star from "@assets/svg/Star.svg";
+import Button from "@components/ui/Button.astro";
+import ThreeBackground from "@components/ui/ThreeBackground.astro";
 ---
 
-<section id="hero">
-   <div class="w-full h-full">
-      <div class="first w-full h-screen grid place-content-center">
-         <h1
-            class="text-6xl text-balance text-center max-w-6xl mx-auto font-BebasNeue"
+<section id="hero" class="">
+   <div
+      class="absolute -top-[200px] -left-[100px] -z-10 pointer-events-none w-full h-fit"
+   >
+      <ThreeBackground />
+   </div>
+   <div class="w-container h-screen flex flex-col justify-end pb-32 space-y-10">
+      <h1 class="text-8xl text-balance max-w-6xl font-BebasNeue">
+         Webdesign, das mit dir wächst
+      </h1>
+
+      <p class="text-lg text-muted-foreground text-balance max-w-4xl">
+         Technologien entwickeln sich rasant – deine Website sollte Schritt
+         halten. Ich gestalte flexible, skalierbare Lösungen, die heute
+         beeindrucken und morgen genauso stark performen.
+      </p>
+
+      <Button variant="dark">
+         <a href="/" class="w-fit flex items-center gap-x-6 pl-2 pr-0.5 py-1"
+            >Meine lezten arbeiten <span class="bg-primary rounded-md p-1"
+               ><ArrowLongRight /></span
+            ></a
          >
-            Discover Quantum, revolutionizing the packaging industry with
-            unparalleled elasticity and durability. Where traditional wraps
-            falter, Quantum stands firm.
-         </h1>
-      </div>
+      </Button>
 
-      <div class="second w-full h-full pt-[470px] pb-[280px]">
-         <div class="w-full max-h-[776px]">
-            <h2 class="text-6xl font-BebasNeue text-center mb-96">
-               Strong film performance
-            </h2>
+      <div class="flex items-center space-x-2">
+         <span
+            class="bg-primary text-background size-5 rounded-full inline-flex items-center justify-center"
+            ><Star width={16} /></span
+         >
+         <p>4.7 Bewertungen auf</p>
 
-            <h3
-               class="text-3xl font-BebasNeue w-1/2 text-balance text-center mb-20 mx-auto"
-            >
-               In the world of packaging, every detail counts. Quantum emerges
-               at the intersection of innovation and necessity, designed for
-               those who seek the best.
-            </h3>
-
-            <div class="cards flex gap-14 w-[67.5%] mx-auto text-primary">
-               <p class="l">
-                  Traditional wraps have set a standard; Quantum redefines it.
-                  Every inch is engineered for optimal performance, embracing
-                  products with unmatched resilience. While many films promise
-                  protection, Quantum delivers it consistently, adapting to
-                  diverse challenges with grace and tenacity.
-               </p>
-
-               <p class="r">
-                  Beyond just wrapping, Quantum is a testament to advanced
-                  material science. Its properties, meticulously enhanced, work
-                  in harmony to safeguard every package. From the initial
-                  stretch to long-term retention, experience the peace of mind
-                  that only Quantum's superior design can provide.
-               </p>
-            </div>
-         </div>
+         <p>GOOGLE</p>
       </div>
    </div>
 </section>

@@ -1,0 +1,23 @@
+---
+const { variant } = Astro.props;
+
+let variantStyles = "";
+
+switch (variant) {
+   case "dark":
+      variantStyles = "w-fit border test rounded-lg";
+      break; // Stops execution within the switch
+   case "light":
+      variantStyles =
+         "w-fit text-black bg-white rounded-lg border border-background";
+      break;
+   // ... more cases ...
+   default:
+      variantStyles =
+         "w-fit text-black border border-background bg-white rounded-lg p-2";
+}
+---
+
+<button class:list={[variantStyles]}>
+   <slot />
+</button>

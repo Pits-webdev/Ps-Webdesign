@@ -1,0 +1,100 @@
+---
+import AstroIcon from "@assets/svg/brand/astro.svg";
+import GsapIcon from "@assets/svg/brand/gsap.svg";
+import NextIcon from "@assets/svg/brand/next.svg";
+import OpenGlIcon from "@assets/svg/brand/opengl.svg";
+import ReactIcon from "@assets/svg/brand/react.svg";
+import TailwindIcon from "@assets/svg/brand/tailwind.svg";
+import ThreeIcon from "@assets/svg/brand/three.svg";
+import TypescriptIcon from "@assets/svg/brand/typescript.svg";
+import WebglIcon from "@assets/svg/brand/webgl.svg";
+
+const Icons = [
+   GsapIcon,
+   AstroIcon,
+   ReactIcon,
+   NextIcon,
+   TailwindIcon,
+   TypescriptIcon,
+   ThreeIcon,
+   OpenGlIcon,
+   WebglIcon,
+];
+
+const { direction } = Astro.props;
+---
+
+<div class="relative max-w-full select-none overflow-clip">
+   <div
+      class="w-[120px] h-full absolute top-0 left-0 bg-linear-to-r from-background to-transparent z-10"
+   >
+   </div>
+   <div
+      class="w-[120px] h-full absolute top-0 right-0 bg-linear-to-r from-transparent to-background z-10"
+   >
+   </div>
+
+   <div class="marquee-inner flex">
+      <div
+         class="marquee-track flex gap-32 pl-32 whitespace-nowrap"
+         data-direction={direction}
+      >
+         {
+            Icons.map((Icon) => (
+               <div>
+                  <Icon class="icon" />
+               </div>
+            ))
+         }
+      </div>
+
+      <div
+         class="marquee-track flex gap-32 pl-32 whitespace-nowrap"
+         data-direction={direction}
+      >
+         {
+            Icons.map((Icon) => (
+               <div>
+                  <Icon class="icon" />
+               </div>
+            ))
+         }
+      </div>
+   </div>
+</div>
+
+<script>
+   import gsap from "gsap";
+
+   const marqueeTracks = gsap.utils.toArray<HTMLElement>(".marquee-track"); // Typisierung für HTMLElement
+
+   let speed = 30; // Dauer für einen kompletten Durchlauf eines Icon-Sets
+
+   marqueeTracks.forEach((track: any) => {
+      const direction = track.getAttribute("data-direction");
+
+      const xStart = direction === "toRight" ? -100 : 0; // Start für den zweiten Teil des Loops
+
+      // Setze die initiale Position des Tracks
+      gsap.set(track, { xPercent: xStart });
+
+      gsap.to(track, {
+         xPercent: direction === "toRight" ? 0 : -100, // Der Track bewegt sich um die Breite eines *einfachen* Satzes
+         ease: "none",
+         duration: speed,
+         repeat: -1,
+
+         modifiers: {
+            xPercent: gsap.utils.wrap(-100, 0),
+         },
+
+         // Füge einen `onRepeat` Callback hinzu, um die Position zurückzusetzen
+         // wenn der Loop beendet ist, um den nahtlosen Übergang zu gewährleisten.
+         // Dies ist in diesem Setup entscheidend.
+         //eventuel ausklammern
+         onRepeat: () => {
+            gsap.set(track, { xPercent: xStart });
+         },
+      });
+   });
+</script>

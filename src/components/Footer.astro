@@ -2,15 +2,59 @@
 
 ---
 
-<footer class="w-full h-full bg-background/20">
-   <div
-      class="px-4 w-full h-96 flex flex-col items-center justify-between bg-linear-to-b from-background/10 to-primary/20"
-   >
-      <div class="h-full flex items-center justify-center">
-         <p>Footer</p>
+<footer
+   class="w-full h-[36vh] bg-foreground text-background fixed bottom-0 -z-10 flex flex-col justify-center rounded-t-4xl"
+>
+   <div class="grid grid-cols-1 gap-y-4 tablet:grid-cols-3 tablet:gap-y- p-8">
+      <div class="mx-auto">
+         <a
+            class="flex items-start space-x-2 mx-auto"
+            href="/webdesign-solutions"
+         >
+            <span class="font-bold text-lg">Webdesign Solution</span>
+         </a>
       </div>
-      <div class="h-14">
-         <span class="text-sm text-zinc-400">Copy right @ 2026</span>
+      <div class="mx-auto">
+         <p class="font-bold mb-2">Kontakt</p>
+         <p class="text-sm mb-1">company</p>
+         <p class="text-sm mb-1">Adresse</p>
+         <p class="text-sm">PLZ Ort</p>
+      </div>
+
+      <div class="mx-auto">
+         <p class="font-bold text-base mb-2">Rechtliches</p>
+         <a href="/webdesign-solutions/impressum" class="text-sm mb-1 block"
+            >Impressum</a
+         >
+         <a href="/webdesign-solutions/datenschutz" class="text-sm block"
+            >Datenschutz</a
+         >
+      </div>
+
+      <div class="mx-auto">
+         <p class="tablet:text-lg">Schreiben Sie mir eine Email</p>
+         <div class="relative w-fit">
+            <a class="tablet:text-2xl" href="#kontakt">myemail@gmail.com</a>
+            <span
+               class="bg-foreground absolute left-0 -bottom-[3px] w-full h-[1px]"
+            ></span>
+         </div>
+      </div>
+
+      <div
+         class="mx-auto mt-auto tablet:col-start-2 tablet:row-start-3 desktop:row-start-2"
+      >
+         <p class="!text-sm text-wrap">Copyright © PS Webdesign 2025</p>
+      </div>
+
+      <div class="mx-auto tablet:col-start-3">
+         <p class="">Rufen Sie mich an</p>
+         <div class="relative w-fit">
+            <p class="tablet:!text-2xl">049 123456789</p>
+            <span
+               class="absolute left-0 -bottom-[3px] w-full h-[1px] bg-foreground"
+            ></span>
+         </div>
       </div>
    </div>
 </footer>

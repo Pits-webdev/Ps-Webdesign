@@ -1,24 +1,28 @@
 ---
-import PageLoader from "../components/PageLoader.astro";
-import AboutSection from "../components/Start/AboutSection.astro";
-import HeroSection from "../components/Start/HeroSection.astro";
-import ServicesSection from "../components/Start/ServicesSection.astro";
-import ShopEssentialsSection from "../components/Start/ShopEssentialsSection.astro";
-import TaglineSection from "../components/Start/TaglineSection.astro";
-import ThreeBackground from "../components/Start/ThreeBackground.astro";
-import ControlBar from "../components/ui/ControlBar.astro";
-import Layout from "../layouts/Layout.astro";
+import PageLoader from "@components/PageLoader.astro";
+import AboutSection from "@components/Start/AboutSection.astro";
+import Customers from "@components/Start/Customers.astro";
+import HeroSection from "@components/Start/HeroSection.astro";
+import ServicesSection from "@components/Start/ServicesSection.astro";
+import ShopEssentialsSection from "@components/Start/ShopEssentialsSection.astro";
+import TaglineSection from "@components/Start/TaglineSection.astro";
+import WhyUs from "@components/Start/WhyUs.astro";
+import ControlBar from "@components/ui/ControlBar.astro";
+import ThreeBackground from "@components/ui/ThreeBackground.astro";
+import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="Start">
-	<PageLoader />
-	<ThreeBackground />
-	<main class="">
-		<HeroSection />
+	<!-- <PageLoader /> -->
 
-		<AboutSection />
+	<main class="relative min-h-screen mb-[36vh] z-10 bg-background">
+		<HeroSection />
+		<Customers />
+		<WhyUs />
 		<ServicesSection />
 
-		<ControlBar />
+		<AboutSection />
+
+		<!-- <ControlBar /> -->
 	</main>
 </Layout>

@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+
+import kZufrieden from "@assets/images/k-zufrieden.webp";
+---
+
+<section class="py-40">
+   <div class="w-container space-y-40">
+      <div class="top grid grid-cols-[1fr_2fr]">
+         <div class="w-full h-full">
+            <span class="text-primary text-sm">002</span>
+            <p>Warum wählst du mich</p>
+         </div>
+         <div class="w-full flex flex-col">
+            <h2 class="text-8xl">Unser Vorteil.</h2>
+            <p class="text-muted-foreground text-balance">
+               Entdecken Sie, wie unsere maßgeschneiderten Designlösungen,
+               strategisches Denken und bewährte Fachwissen Ihre Marke
+               hervorheben und Sie hervorheben können.
+            </p>
+         </div>
+      </div>
+
+      <!-- gallery -->
+      <div class="grid grid-cols-3 ring ring-white/15">
+         <div class="bg-accent w-full h-full col-span-2 p-8">
+            <div class="w-full h-full flex flex-col gap-y-5 justify-between">
+               <div class="space-y-2">
+                  <h3 class="text-4xl">Mehrere Jahre Erfahrung</h3>
+                  <p class="max-w-[880px] text-muted-foreground">
+                     Hunderte erfolgreiche Projekte aus verschiedenen Branchen,
+                     basierend auf acht Jahren verfeinerter Design- und
+                     Entwicklungspraktiken.
+                  </p>
+               </div>
+
+               <div class="w-full h-full bg-muted-foreground">gallery</div>
+            </div>
+         </div>
+         <div class="h-full relative">
+            <Image src={kZufrieden} alt="strahlende Frau" width={580} />
+
+            <div class="w-full h-full absolute top-0 left-0 p-5">
+               <div
+                  class="flex flex-col items-center justify-center w-full h-full"
+               >
+                  <div
+                     class="flex flex-col items-center justify-center w-full h-full space-y-3"
+                  >
+                     <p class="text-3xl font-semibold">Zufriedenheitsrate</p>
+                     <span class="text-6xl font-semibold">98%</span>
+                     <p class="text-lg text-black">von 95+ Kundenprojekten</p>
+                  </div>
+
+                  <div class="w-full flex justify-end">
+                     <p>rate star</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="bg-primary h-[420px] p-8"></div>
+         <div class="bg-accent h-[420px]"></div>
+         <div class="bg-accent h-[420px]"></div>
+      </div>
+   </div>
+</section>
