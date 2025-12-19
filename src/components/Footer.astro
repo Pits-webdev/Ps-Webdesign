@@ -9,7 +9,7 @@
       <div class="mx-auto">
          <a
             class="flex items-start space-x-2 mx-auto"
-            href="/webdesign-solutions"
+            href={`${import.meta.env.BASE_URL}`}
          >
             <span class="font-bold text-lg">Webdesign Solution</span>
          </a>
@@ -23,11 +23,13 @@
 
       <div class="mx-auto">
          <p class="font-bold text-base mb-2">Rechtliches</p>
-         <a href="/webdesign-solutions/impressum" class="text-sm mb-1 block"
-            >Impressum</a
+         <a
+            href={`${import.meta.env.BASE_URL}/impressum`}
+            class="text-sm mb-1 block">Impressum</a
          >
-         <a href="/webdesign-solutions/datenschutz" class="text-sm block"
-            >Datenschutz</a
+         <a
+            href={`${import.meta.env.BASE_URL}/datenschutz`}
+            class="text-sm block">Datenschutz</a
          >
       </div>
 

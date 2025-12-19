@@ -23,7 +23,9 @@ import ThreeBackground from "@components/ui/ThreeBackground.astro";
       </p>
 
       <Button variant="dark">
-         <a href="/" class="w-fit flex items-center gap-x-6 pl-2 pr-0.5 py-1"
+         <a
+            href={`${import.meta.env.BASE_URL}/arbeiten`}
+            class="w-fit flex items-center gap-x-6 pl-2 pr-0.5 py-1"
             >Meine lezten arbeiten <span class="bg-primary rounded-md p-1"
                ><ArrowLongRight /></span
             ></a

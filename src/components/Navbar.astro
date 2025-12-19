@@ -6,15 +6,18 @@ import Button from "./ui/Button.astro";
 const pages = [
    {
       name: "About",
-      link: "/about",
+      link: "/ueber-mich",
    },
    {
       name: "Services",
-      link: "/services",
+      link: "/leistungen",
    },
-   { name: "Work", link: "/work" },
+   { name: "Work", link: "/arbeiten" },
    { name: "Blog", link: "/blog" },
 ];
+
+const baseUrl = import.meta.env.BASE_URL;
+// href={`${baseUrl}${page.link}`.replace(/\/+/g, '/')}
 ---
 
 <header
@@ -27,7 +30,10 @@ const pages = [
       <!-- 1. LOGO -->
 
       <div class="flex items-center">
-         <a href="/" class="flex gap-2 items-end text-primary h-fit">
+         <a
+            href={`${import.meta.env.BASE_URL}`}
+            class="flex gap-2 items-end text-primary h-fit"
+         >
             <Logo height={42} />
             <span class="text-foreground tracking-wide">Webdesign</span>
          </a>
@@ -49,7 +55,7 @@ const pages = [
                pages.map(({ name, link }) => (
                   <li>
                      <a
-                        href={link}
+                        href={`${baseUrl}${link}`.replace(/\/+/g, "/")}
                         class="text-base tracking-wider  hover:text-primary transition-colors"
                      >
                         {name}
