@@ -1,65 +1,27 @@
 ---
-
+import Accordion from "@components/ui/Accordion.astro";
 ---
 
 <section id="services">
-   <div class="w-container h-full flex flex-col pt-6 py-12">
-      <div class="max-w-4xl h-full space-y-8">
-         <p class="text-primary">Services</p>
-         <h2 class="text-4xl font-bold text-balance max-w-4xl">
-            Meine Lösungen für Ihr digitales Wachstum
-         </h2>
-
-         <p class="text-muted-foreground text-balance">
-            Ich bieten Expertenleistungen für Webflow-Design, -entwicklung, SEO
-            und Support – maßgeschneidert, um die Leistung, das Nutzererlebnis
-            und das Wachstum Ihrer Website zu steigern.
-         </p>
+   <div class="w-container">
+      <div class="top grid grid-cols-[1fr_2fr]">
+         <div class="w-full h-full">
+            <span class="text-primary text-sm">003</span>
+            <p>Leistungen</p>
+         </div>
+         <div class="w-full flex flex-col space-y-8">
+            <h2 class="text-8xl">Wachstum mit Astro Framework.</h2>
+            <p class="text-muted-foreground text-balance">
+               Design. Entwicklung. SEO. Support. Alles aus einer Hand – mit dem
+               Astro Framework bringen wir Ihre Website auf das nächste Level.
+               Maßgeschneiderte Lösungen für Performance, Nutzererlebnis und
+               nachhaltiges Wachstum.
+            </p>
+         </div>
       </div>
 
-      <div class="cards grid grid-cols-3 gap-8 mt-32">
-         <div
-            class="card space-y-8 p-4 bg-accent rounded-lg border border-white/20"
-         >
-            <span class="inline-flex">icon</span>
-            <h3>Design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-         </div>
-         <div
-            class="card space-y-8 p-4 bg-accent rounded-lg border border-white/20"
-         >
-            <span class="inline-flex">icon</span>
-            <h3>Design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-         </div>
-         <div
-            class="card space-y-8 p-4 bg-accent rounded-lg border border-white/20"
-         >
-            <span class="inline-flex">icon</span>
-            <h3>Design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-         </div>
-         <div
-            class="card space-y-8 p-4 bg-accent rounded-lg border border-white/20"
-         >
-            <span class="inline-flex">icon</span>
-            <h3>Design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-         </div>
-         <div
-            class="card space-y-8 p-4 bg-accent rounded-lg border border-white/20"
-         >
-            <span class="inline-flex">icon</span>
-            <h3>Design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-         </div>
-         <div
-            class="card space-y-8 p-4 bg-accent rounded-lg border border-white/20"
-         >
-            <span class="inline-flex">icon</span>
-            <h3>Design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-         </div>
+      <div class="mt-32">
+         <Accordion />
       </div>
    </div>
 </section>

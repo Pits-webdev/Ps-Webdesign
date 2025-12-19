@@ -32,9 +32,9 @@
   --accent-foreground: rgba(251,251,251,1.0);;
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.9220 0 0);
+  --border: rgba(255,255,255,0.10);
   --input: oklch(0.9220 0 0);
-  --ring: oklch(0.7080 0 0);
+  --ring: rgba(255,255,255,0.10);
   --chart-1: oklch(0.8100 0.1000 252);
   --chart-2: oklch(0.6200 0.1900 260);
   --chart-3: oklch(0.5500 0.2200 263);
@@ -165,5 +165,5 @@
 }
 
 .test{
-    @apply bg-secondary border-zinc-600/90
+    @apply bg-[rgba(255,255,255,0.10)] border-zinc-600/90
 }

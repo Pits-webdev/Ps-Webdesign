@@ -1,0 +1,53 @@
+---
+
+---
+
+<div
+   class="follow-mouse fixed top-0 left-0 size-6 bg-primary rounded-full pointer-events-none z-999 mix-blend-normal opacity-0 will-change-transform"
+>
+</div>
+
+<script>
+   import gsap from "gsap";
+
+   const links = document.querySelectorAll("a, button, input, label, textarea");
+
+   //Follow Mouse
+   let xTo = gsap.quickTo(".follow-mouse", "x", {
+      duration: 0.4,
+      ease: "power3",
+   });
+   let yTo = gsap.quickTo(".follow-mouse", "y", {
+      duration: 0.4,
+      ease: "power3",
+   });
+
+   gsap.set(".follow-mouse", { xPercent: -50, yPercent: -50 });
+
+   window.addEventListener("mousemove", (e) => {
+      gsap.to(".follow-mouse", {
+         autoAlpha: 1,
+         duration: 0.2,
+         overwrite: "auto",
+      });
+
+      xTo(e.clientX);
+      yTo(e.clientY);
+   });
+
+   // Optional: Cursor verstecken, wenn Maus das Fenster verlässt
+   document.addEventListener("mouseleave", () => {
+      gsap.to(".mouse-follower", { autoAlpha: 0 });
+   });
+
+   // Interactive scale auf 0. (a,button, input usw...)
+   links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+         gsap.to(".follow-mouse", { scale: 0, duration: 0.5 });
+      });
+
+      link.addEventListener("mouseleave", () => {
+         gsap.to(".follow-mouse", { scale: 1, duration: 0.5 });
+      });
+   });
+</script>

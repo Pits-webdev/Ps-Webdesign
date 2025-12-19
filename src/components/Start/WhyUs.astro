@@ -1,7 +1,14 @@
 ---
 import { Image } from "astro:assets";
 
-import kZufrieden from "@assets/images/k-zufrieden.webp";
+import Handshake from "@assets/images/handshake.webp";
+import MacBook_Mockup1 from "@assets/images/MacBook_Mockup1.png";
+import Mockup1 from "@assets/images/mockup/mockup-1.webp";
+import Mockup2 from "@assets/images/mockup/mockup-2.webp";
+import price from "@assets/images/price.webp";
+import Clock from "@assets/svg/clock.svg";
+import Email from "@assets/svg/mail.svg";
+import Scale from "@assets/svg/scale.svg";
 ---
 
 <section class="py-40">
@@ -11,7 +18,7 @@ import kZufrieden from "@assets/images/k-zufrieden.webp";
             <span class="text-primary text-sm">002</span>
             <p>Warum wählst du mich</p>
          </div>
-         <div class="w-full flex flex-col">
+         <div class="w-full flex flex-col space-y-8">
             <h2 class="text-8xl">Unser Vorteil.</h2>
             <p class="text-muted-foreground text-balance">
                Entdecken Sie, wie unsere maßgeschneiderten Designlösungen,
@@ -22,10 +29,10 @@ import kZufrieden from "@assets/images/k-zufrieden.webp";
       </div>
 
       <!-- gallery -->
-      <div class="grid grid-cols-3 ring ring-white/15">
+      <div class="grid grid-cols-3 ring ring-ring">
          <div class="bg-accent w-full h-full col-span-2 p-8">
-            <div class="w-full h-full flex flex-col gap-y-5 justify-between">
-               <div class="space-y-2">
+            <div class="w-full h-full flex flex-col gap-y-10 justify-between">
+               <div class="space-y-8">
                   <h3 class="text-4xl">Mehrere Jahre Erfahrung</h3>
                   <p class="max-w-[880px] text-muted-foreground">
                      Hunderte erfolgreiche Projekte aus verschiedenen Branchen,
@@ -34,11 +41,27 @@ import kZufrieden from "@assets/images/k-zufrieden.webp";
                   </p>
                </div>
 
-               <div class="w-full h-full bg-muted-foreground">gallery</div>
+               <div
+                  class="w-full h-full border border-border p-8 flex gap-5 items-center justify-center"
+               >
+                  <div>
+                     <Image src={Mockup1} alt="Maccbook" />
+                  </div>
+                  <div>
+                     <Image src={Mockup2} alt="Maccbook" />
+                  </div>
+                  <div>
+                     <Image src={Mockup1} alt="Maccbook" />
+                  </div>
+                  <div>
+                     <Image src={Mockup2} alt="Maccbook" />
+                  </div>
+               </div>
             </div>
          </div>
+
          <div class="h-full relative">
-            <Image src={kZufrieden} alt="strahlende Frau" width={580} />
+            <Image src={Handshake} alt="strahlende Frau" width={640} />
 
             <div class="w-full h-full absolute top-0 left-0 p-5">
                <div
@@ -49,7 +72,9 @@ import kZufrieden from "@assets/images/k-zufrieden.webp";
                   >
                      <p class="text-3xl font-semibold">Zufriedenheitsrate</p>
                      <span class="text-6xl font-semibold">98%</span>
-                     <p class="text-lg text-black">von 95+ Kundenprojekten</p>
+                     <p class="text-lg font-semibold">
+                        von 95+ Kundenprojekten
+                     </p>
                   </div>
 
                   <div class="w-full flex justify-end">
@@ -58,9 +83,174 @@ import kZufrieden from "@assets/images/k-zufrieden.webp";
                </div>
             </div>
          </div>
-         <div class="bg-primary h-[420px] p-8"></div>
-         <div class="bg-accent h-[420px]"></div>
-         <div class="bg-accent h-[420px]"></div>
+
+         <div class="h-full relative">
+            <Image
+               src={price}
+               alt="strahlende Frau"
+               class="w-full h-full object-cover"
+               width={640}
+            />
+
+            <div class="w-full h-full absolute top-0 left-0 p-5">
+               <div
+                  class="flex flex-col items-center justify-center w-full h-full"
+               >
+                  <div
+                     class="flex flex-col items-center justify-center w-full h-full space-y-3"
+                  >
+                     <p class="text-3xl font-semibold">Faire Preise</p>
+                     <span class="text-6xl font-semibold">98%</span>
+                     <p class="text-lg font-semibold">
+                        von 95+ Kundenprojekten
+                     </p>
+                  </div>
+
+                  <div class="w-full flex justify-end">
+                     <p>rate star</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div
+            class="bg-accent border-t border-border grid grid-rows-[1fr_1px_1fr] gap-4"
+         >
+            <!-- deco -->
+            <div class="w-full h-full p-8 grid grid-rows-[auto_1fr_auto]">
+               <div class="flex items-center justify-between">
+                  <span
+                     class="inline-flex size-4 border-l border-l-primary border-t border-t-primary"
+                  ></span>
+
+                  <span
+                     class="inline-flex size-4 border-r border-r-primary border-t border-t-primary"
+                  ></span>
+               </div>
+
+               <div class="p-8 flex flex-col items-center justify-center gap-4">
+                  <span class="inline-flex size-12 text-primary"
+                     ><Clock class="w-full h-full" /></span
+                  >
+
+                  <h4 class="text-3xl">Schnelle Bearbeitung</h4>
+
+                  <p class="text-muted-foreground">
+                     Projekte wurden in nur zwei Wochen gestartet.
+                  </p>
+               </div>
+
+               <div class="flex items-center justify-between">
+                  <span
+                     class="inline-flex size-4 border-l border-l-primary border-b border-b-primary"
+                  ></span>
+                  <span
+                     class="inline-flex size-4 border-r border-r-primary border-b border-b-primary"
+                  ></span>
+               </div>
+            </div>
+
+            <span class="border-t border-border"></span>
+
+            <div class="w-full h-full p-8 grid grid-rows-[auto_1fr_auto]">
+               <div class="flex items-center justify-between">
+                  <span
+                     class="inline-flex size-4 border-l border-l-primary border-t border-t-primary"
+                  ></span>
+
+                  <span
+                     class="inline-flex size-4 border-r border-r-primary border-t border-t-primary"
+                  ></span>
+               </div>
+
+               <div class="p-8 flex flex-col items-center justify-center gap-4">
+                  <span class="inline-flex size-12 p-1 text-primary"
+                     ><Scale class={"w-full h-full"} /></span
+                  >
+
+                  <h4 class="text-3xl">Skalierbares Design</h4>
+
+                  <p class="text-muted-foreground max-w-[400px] text-center">
+                     Entwickle Systeme, die mit deinem Produkt skalieren.
+                  </p>
+               </div>
+
+               <div class="flex items-center justify-between">
+                  <span
+                     class="inline-flex size-4 border-l border-l-primary border-b border-b-primary"
+                  ></span>
+                  <span
+                     class="inline-flex size-4 border-r border-r-primary border-b border-b-primary"
+                  ></span>
+               </div>
+            </div>
+         </div>
+
+         <!-- last -->
+         <div
+            class="bg-primary border-l border-border grid grid-rows-[1fr_1px_1fr] gap-4"
+         >
+            <!-- deco -->
+            <div class="w-full h-full p-8 space-y-2">
+               <h4 class="text-3xl mb-6">
+                  Partnerschaft, die bleibt – auch nach Projektabschluss
+               </h4>
+
+               <p>Unser Engagement endet nicht mit der Fertigstellung.</p>
+               <p class="">
+                  Wir stehen Ihnen weiterhin zuverlässig zur Seite, begleiten
+                  Sie bei neuen Herausforderungen und sorgen dafür, dass Ihre
+                  Lösungen langfristig erfolgreich bleiben.
+               </p>
+            </div>
+
+            <span></span>
+
+            <div class="w-full h-full p-8 grid grid-rows-[auto_1fr_auto]">
+               <div class="flex items-center justify-between">
+                  <span
+                     class="inline-flex size-4 border-l border-l-primary border-t border-t-primary"
+                  ></span>
+
+                  <span
+                     class="inline-flex size-4 border-r border-r-primary border-t border-t-primary"
+                  ></span>
+               </div>
+
+               <div class="p-8 flex flex-col items-center justify-center gap-4">
+                  <span class="inline-flex size-12"
+                     ><Email class={"w-full h-full"} /></span
+                  >
+
+                  <h4 class="text-3xl">brandname@email.com</h4>
+
+                  <p class="max-w-[400px] text-center">
+                     Ich freue mich darauf, Sie persönlich zu unterstützen .
+                  </p>
+               </div>
+
+               <div class="flex items-center justify-between">
+                  <span
+                     class="inline-flex size-4 border-l border-l-primary border-b border-b-primary"
+                  ></span>
+                  <span
+                     class="inline-flex size-4 border-r border-r-primary border-b border-b-primary"
+                  ></span>
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </section>
+
+<!-- Partnerschaft, die bleibt – auch nach Projektabschluss -->
+
+<!-- 
+ <p>Unser Engagement endet nicht mit der Fertigstellung.</p>
+                  <p class="">
+                     Wir stehen Ihnen weiterhin zuverlässig zur Seite, begleiten
+                     Sie bei neuen Herausforderungen und sorgen dafür, dass Ihre
+                     Lösungen langfristig erfolgreich bleiben.
+                  </p>
+
+-->

@@ -1,0 +1,96 @@
+---
+// Beispiel-Daten
+const items = [
+  { title: "UI/UX Design", text: "Mit dem Astro Framework entwickeln wir moderne und nutzerfreundliche Interfaces, die nicht nur optisch überzeugen, sondern auch technisch leichtgewichtig bleiben. Unser Fokus liegt auf klarer Struktur, intuitiver Bedienung und einem Design, das Ihre Marke perfekt widerspiegelt. Durch die Kombination von Astro’s Performance-Vorteilen mit kreativen UI/UX-Konzepten schaffen wir ein Erlebnis, das Besucher begeistert und langfristig bindet." 
+  },
+  
+  { title: "Development", text: "Astro bietet eine innovative Architektur, die schnelle Ladezeiten und modulare Entwicklung ermöglicht. Wir setzen auf sauberen Code, wiederverwendbare Komponenten und eine flexible Integration von Tools und Frameworks. So entstehen Webseiten, die nicht nur technisch auf dem neuesten Stand sind, sondern auch zukunftssicher bleiben. Unser Development-Ansatz mit Astro sorgt dafür, dass Ihre Website skalierbar, wartbar und leistungsstark ist." 
+  },
+
+  { title: "Seo", text: "Das Astro Framework generiert standardmäßig statische Seiten, die von Suchmaschinen optimal indexiert werden können. Wir kombinieren diese technische Grundlage mit gezielten SEO-Strategien: von sauberer Semantik über schnelle Ladezeiten bis hin zu optimierten Meta-Daten. So stellen wir sicher, dass Ihre Website nicht nur gefunden wird, sondern auch in den Rankings steigt und nachhaltig mehr Sichtbarkeit erzielt." 
+  }
+];
+---
+
+<div class="accordion-wrapper w-full mx-auto space-y-4">
+  {items.map((item, index) => (
+    <div class="accordion-item border-b border-border overflow-hidden">
+      <!-- HEADER / TRIGGER -->
+      <button class="accordion-trigger w-full flex justify-between items-center py-4 text-left cursor-pointer group">
+        <span class="text-3xl font-medium group-hover:text-primary transition-colors">
+            {item.title}
+        </span>
+        
+        <!-- PFEIL ICON -->
+        <svg class="accordion-icon w-6 h-6 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <!-- CONTENT (Startet versteckt mit height: 0) -->
+      <div class="accordion-content h-0 overflow-hidden">
+        <div class="pb-4 text-muted-foreground">
+          <p class="max-w-4/5 text-lg">{item.text}</p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  // Wir nutzen gsap.utils für sauberes Array & Typing
+  const items = gsap.utils.toArray<HTMLElement>(".accordion-item");
+
+  items.forEach((item) => {
+    const trigger = item.querySelector(".accordion-trigger");
+    const content = item.querySelector(".accordion-content");
+    const icon = item.querySelector(".accordion-icon");
+
+    trigger?.addEventListener("click", () => {
+      
+      // 1. WICHTIG: Prüfen wir den Status IMMER live anhand der Klasse
+      // NICHT über eine "let isOpen" Variable.
+      const isActive = item.classList.contains("active");
+
+      // 2. Wenn es noch nicht offen ist, schließen wir erst die anderen
+      if (!isActive) {
+        closeAllOthers(item);
+      }
+
+      // 3. Logik basierend auf der Klasse
+      if (isActive) {
+        // --- ZU MACHEN ---
+        gsap.to(content, { height: 0, duration: 0.4, ease: "power2.inOut" });
+        gsap.to(icon, { rotation: 0, duration: 0.3 });
+        item.classList.remove("active"); // Status im DOM updaten
+      } else {
+        // --- AUF MACHEN ---
+        gsap.to(content, { height: "auto", duration: 0.5, ease: "power2.out" });
+        gsap.to(icon, { rotation: 180, duration: 0.3 });
+        item.classList.add("active"); // Status im DOM updaten
+      }
+    });
+  });
+
+  function closeAllOthers(activeItem: HTMLElement) {
+    items.forEach((otherItem) => {
+      // Wenn es nicht das Item ist, auf das wir geklickt haben...
+      if (otherItem !== activeItem) {
+        
+        // ... und wenn es laut Klasse offen ist (Performance sparen)
+        if (otherItem.classList.contains("active")) {
+            const content = otherItem.querySelector(".accordion-content");
+            const icon = otherItem.querySelector(".accordion-icon");
+
+            gsap.to(content, { height: 0, duration: 0.4, ease: "power2.inOut" });
+            gsap.to(icon, { rotation: 0, duration: 0.3 });
+            
+            // WICHTIG: Auch hier die Klasse entfernen!
+            otherItem.classList.remove("active");
+        }
+      }
+    });
+  }
+</script>

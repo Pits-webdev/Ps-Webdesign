@@ -21,10 +21,13 @@ const Icons = [
    WebglIcon,
 ];
 
-const { direction } = Astro.props;
+const { direction = "toLeft" } = Astro.props;
+
+
 ---
 
-<div class="relative max-w-full select-none overflow-clip">
+<div class="marquee-outer relative max-w-full select-none overflow-clip" 
+      data-direction={direction}>
    <div
       class="w-[120px] h-full absolute top-0 left-0 bg-linear-to-r from-background to-transparent z-10"
    >
@@ -34,14 +37,14 @@ const { direction } = Astro.props;
    >
    </div>
 
-   <div class="marquee-inner flex">
+   <div class="marquee-inner flex w-max will-change-transform">
       <div
-         class="marquee-track flex gap-32 pl-32 whitespace-nowrap"
-         data-direction={direction}
+         class="marquee-track flex shrink-0 gap-32 pl-32 whitespace-nowrap"
+         
       >
          {
             Icons.map((Icon) => (
-               <div>
+               <div class="flex items-center justify-center"> <!-- Optionaler Wrapper für Icon Ausrichtung -->
                   <Icon class="icon" />
                </div>
             ))
@@ -49,12 +52,11 @@ const { direction } = Astro.props;
       </div>
 
       <div
-         class="marquee-track flex gap-32 pl-32 whitespace-nowrap"
-         data-direction={direction}
+         class="marquee-track flex shrink-0 gap-32 pl-32 whitespace-nowrap"
       >
          {
             Icons.map((Icon) => (
-               <div>
+               <div class="flex items-center justify-center"> <!-- Optionaler Wrapper für Icon Ausrichtung -->
                   <Icon class="icon" />
                </div>
             ))
@@ -65,36 +67,60 @@ const { direction } = Astro.props;
 
 <script>
    import gsap from "gsap";
+   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-   const marqueeTracks = gsap.utils.toArray<HTMLElement>(".marquee-track"); // Typisierung für HTMLElement
+   gsap.registerPlugin(ScrollTrigger);
 
-   let speed = 30; // Dauer für einen kompletten Durchlauf eines Icon-Sets
+   const marqueeElements = gsap.utils.toArray<HTMLElement>(".marquee-outer")
 
-   marqueeTracks.forEach((track: any) => {
-      const direction = track.getAttribute("data-direction");
+   marqueeElements.forEach((element)=>{
+      const tracks = element.querySelectorAll(".marquee-track")
 
-      const xStart = direction === "toRight" ? -100 : 0; // Start für den zweiten Teil des Loops
+      const direction = element.getAttribute("data-direction")
 
-      // Setze die initiale Position des Tracks
-      gsap.set(track, { xPercent: xStart });
+      let speed = 30;
 
-      gsap.to(track, {
-         xPercent: direction === "toRight" ? 0 : -100, // Der Track bewegt sich um die Breite eines *einfachen* Satzes
-         ease: "none",
+      // Logik-Check:
+      // toRight: Startet bei -100% (links außen) und fährt auf 0% (Start)
+      // toLeft (else): Startet bei 0% und fährt auf -100%
+      const startX = direction === "toRight" ? -100 : 0;
+      const endX = direction === "toRight" ? 0 : -100;
+
+      gsap.set(tracks, { xPercent: startX });
+
+      const tween = gsap.to(tracks, {
+         xPercent: endX,
          duration: speed,
+         ease: "none",
          repeat: -1,
-
-         modifiers: {
-            xPercent: gsap.utils.wrap(-100, 0),
-         },
-
-         // Füge einen `onRepeat` Callback hinzu, um die Position zurückzusetzen
-         // wenn der Loop beendet ist, um den nahtlosen Übergang zu gewährleisten.
-         // Dies ist in diesem Setup entscheidend.
-         //eventuel ausklammern
-         onRepeat: () => {
-            gsap.set(track, { xPercent: xStart });
-         },
+         paused: true // Warten auf ScrollTrigger
       });
-   });
+
+      ScrollTrigger.create({
+         trigger: element,
+         start: "top bottom",
+         end: "bottom top",
+         onToggle: (self) => {
+            if (self.isActive) {
+               tween.play();
+            } else {
+               tween.pause();
+            }
+         },
+
+         // Richtungswechsel bei Scroll
+         onUpdate: (self) => {
+             // self.direction ist 1 (Runter) oder -1 (Hoch)
+             // Wir animieren den timeScale, damit der Wechsel weich ist,
+             // statt abrupt umzuschalten.
+             gsap.to(tween, { 
+                 timeScale: self.direction, 
+                 duration: 0.3, // Wie schnell reagiert er? (0.5s Übergang)
+                 overwrite: true 
+             });
+         }
+      });
+   })
 </script>
+
+ 
