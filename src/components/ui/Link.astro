@@ -1,0 +1,36 @@
+---
+import ArrowLongRight from "@assets/svg/arrow-long-right.svg";
+
+interface Props {
+   title: string;
+   path: string;
+}
+
+const { title, path } = Astro.props;
+---
+
+<a href={`${import.meta.env.BASE_URL}/${path}`} class="w-fit h-full">
+   <div class="w-full h-10 flex items-center gap-x-4 group">
+      <div class="title-outer w-full h-full overflow-clip">
+         <div class="title-inner group-hover:-translate-y-10 duration-300">
+            <span class="h-10 flex items-center">{title}</span>
+            <span class="h-10 flex items-center">{title}</span>
+         </div>
+      </div>
+
+      <div
+         class="Icon-outer h-9 w-9 rounded-md bg-primary flex items-center justify-end overflow-x-clip"
+      >
+         <div
+            class="Icon-inner flex gap-0 text-white group-hover:translate-x-[30px] duration-300 ease-in-out"
+         >
+            <span class="w-full h-full flex items-center justify-center pr-1.5"
+               ><ArrowLongRight /></span
+            >
+            <span class="w-full h-full flex items-center justify-center pr-1.5"
+               ><ArrowLongRight /></span
+            >
+         </div>
+      </div>
+   </div>
+</a>

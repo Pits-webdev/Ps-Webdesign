@@ -1,15 +1,21 @@
 ---
-const { variant } = Astro.props;
+interface Props {
+   variant?: "dark" | "light";
+   styles?: string;
+}
+
+const { variant, styles } = Astro.props;
+
+console.log(styles);
 
 let variantStyles = "";
 
 switch (variant) {
    case "dark":
-      variantStyles = "w-fit border test rounded-lg";
+      variantStyles = `bg-border text-foreground ${styles} `;
       break; // Stops execution within the switch
    case "light":
-      variantStyles =
-         "w-fit text-black bg-white rounded-lg border border-background";
+      variantStyles = `bg-foreground text-background ${styles}`;
       break;
    // ... more cases ...
    default:

@@ -1,18 +1,18 @@
 ---
-import ArrowLongRight from "@assets/svg/arrow-long-right.svg";
 import Logo from "@assets/svg/ps-logo.svg";
 import Button from "./ui/Button.astro";
+import Link from "./ui/Link.astro";
 
 const pages = [
    {
-      name: "About",
+      name: "Über mich",
       link: "/ueber-mich",
    },
    {
-      name: "Services",
+      name: "Leistungen",
       link: "/leistungen",
    },
-   { name: "Work", link: "/arbeiten" },
+   { name: "Arbeit", link: "/arbeiten" },
    { name: "Blog", link: "/blog" },
 ];
 
@@ -67,15 +67,13 @@ const baseUrl = import.meta.env.BASE_URL;
       </div>
 
       <div>
-         <Button variant="light"
-            ><a
-               href="/"
-               class="w-fit flex items-center gap-x-6 pl-2 pr-0.5 py-1"
-               >Kontakt<span class="bg-background rounded-md p-1"
-                  ><ArrowLongRight color={"white"} /></span
-               ></a
-            ></Button
+         <!-- "w-fit text-black bg-white rounded-lg border border-background"; -->
+         <Button
+            variant="light"
+            styles="w-fit bg-border rounded-lg border border-border pl-4 pr-1 py-0.5"
          >
+            <Link title="Kontakt" path="/" />
+         </Button>
 
          <button
             id="nav-toggle"
