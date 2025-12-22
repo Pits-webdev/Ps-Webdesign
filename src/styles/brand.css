@@ -27,7 +27,7 @@
   --secondary: rgba(49,49,63,0.7);
   --secondary-foreground: rgba(251,251,251,1.0);
   --muted: rgba(251,251,251,1.0);
-  --muted-foreground: rgba(143,143,143,0.8);
+  --muted-foreground: rgba(165,164,164,0.8);
   --accent: rgba(49,49,63,0.2);
   --accent-foreground: rgba(251,251,251,1.0);;
   --destructive: oklch(0.5770 0.2450 27.3250);

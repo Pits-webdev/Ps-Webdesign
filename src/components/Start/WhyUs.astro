@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 
-import Handshake from "@assets/images/handshake.webp";
+import Handshake from "@assets/images/handshake.png";
 import MacBook_Mockup1 from "@assets/images/MacBook_Mockup1.png";
 import Mockup1 from "@assets/images/mockup/mockup-1.webp";
 import Mockup2 from "@assets/images/mockup/mockup-2.webp";
-import price from "@assets/images/price.webp";
+import price from "@assets/images/payment.png";
 import Clock from "@assets/svg/clock.svg";
 import Email from "@assets/svg/mail.svg";
 import Scale from "@assets/svg/scale.svg";
@@ -61,7 +61,13 @@ import Scale from "@assets/svg/scale.svg";
          </div>
 
          <div class="h-full relative">
-            <Image src={Handshake} alt="strahlende Frau" width={640} />
+            <Image
+               src={Handshake}
+               alt="strahlende Frau"
+               class="w-full h-full object-cover"
+               width={1024}
+               height={766}
+            />
 
             <div class="w-full h-full absolute top-0 left-0 p-5">
                <div
@@ -70,11 +76,8 @@ import Scale from "@assets/svg/scale.svg";
                   <div
                      class="flex flex-col items-center justify-center w-full h-full space-y-3"
                   >
-                     <p class="text-3xl font-semibold">Zufriedenheitsrate</p>
+                     <p class="text-3xl font-medium">Zufriedenheitsrate</p>
                      <span class="text-6xl font-semibold">98%</span>
-                     <p class="text-lg font-semibold">
-                        von 95+ Kundenprojekten
-                     </p>
                   </div>
 
                   <div class="w-full flex justify-end">
@@ -89,7 +92,8 @@ import Scale from "@assets/svg/scale.svg";
                src={price}
                alt="strahlende Frau"
                class="w-full h-full object-cover"
-               width={640}
+               width={1024}
+               height={929}
             />
 
             <div class="w-full h-full absolute top-0 left-0 p-5">
@@ -99,10 +103,11 @@ import Scale from "@assets/svg/scale.svg";
                   <div
                      class="flex flex-col items-center justify-center w-full h-full space-y-3"
                   >
-                     <p class="text-3xl font-semibold">Faire Preise</p>
-                     <span class="text-6xl font-semibold">98%</span>
-                     <p class="text-lg font-semibold">
-                        von 95+ Kundenprojekten
+                     <p class="text-3xl font-medium">Faire Preise</p>
+
+                     <p class="text-lg text-balance text-center">
+                        Wir arbeiten ohne versteckte Gebühren oder nachträgliche
+                        Aufschläge.
                      </p>
                   </div>
 
@@ -133,7 +138,7 @@ import Scale from "@assets/svg/scale.svg";
                      ><Clock class="w-full h-full" /></span
                   >
 
-                  <h4 class="text-3xl">Schnelle Bearbeitung</h4>
+                  <h4 class="text-3xl font-medium">Schnelle Bearbeitung</h4>
 
                   <p class="text-muted-foreground">
                      Projekte wurden in nur zwei Wochen gestartet.
@@ -168,7 +173,7 @@ import Scale from "@assets/svg/scale.svg";
                      ><Scale class={"w-full h-full"} /></span
                   >
 
-                  <h4 class="text-3xl">Skalierbares Design</h4>
+                  <h4 class="text-3xl font-medium">Skalierbares Design</h4>
 
                   <p class="text-muted-foreground max-w-[400px] text-center">
                      Entwickle Systeme, die mit deinem Produkt skalieren.
@@ -192,7 +197,7 @@ import Scale from "@assets/svg/scale.svg";
          >
             <!-- deco -->
             <div class="w-full h-full p-8 space-y-2">
-               <h4 class="text-3xl mb-6">
+               <h4 class="text-3xl mb-6 font-medium">
                   Partnerschaft, die bleibt – auch nach Projektabschluss
                </h4>
 
@@ -242,15 +247,3 @@ import Scale from "@assets/svg/scale.svg";
       </div>
    </div>
 </section>
-
-<!-- Partnerschaft, die bleibt – auch nach Projektabschluss -->
-
-<!-- 
- <p>Unser Engagement endet nicht mit der Fertigstellung.</p>
-                  <p class="">
-                     Wir stehen Ihnen weiterhin zuverlässig zur Seite, begleiten
-                     Sie bei neuen Herausforderungen und sorgen dafür, dass Ihre
-                     Lösungen langfristig erfolgreich bleiben.
-                  </p>
-
--->
