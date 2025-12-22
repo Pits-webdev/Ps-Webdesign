@@ -1,0 +1,108 @@
+---
+// src/components/MainSEO.astro
+import { SEO } from "astro-seo";
+
+interface Props {
+   title?: string;
+   description?: string;
+   image?: string;
+   ogType?: string;
+}
+
+const {
+   title,
+   description = "Entdecken Sie erstklassige Webdesign-Lösungen für Ihr Unternehmen. Wir erstellen maßgeschneiderte und responsive Webseiten.",
+   image = "webdesign-preview.png",
+   ogType = "website",
+} = Astro.props;
+
+/**
+ * 1. PFAD-LOGIK FÜR GITHUB PAGES
+ */
+const baseUrl = import.meta.env.BASE_URL; // Liefert "/repo-name/" oder "/"
+const siteUrl = Astro.site ? Astro.site.origin : "https://webdesign-firma.de";
+
+// Canonical URL (Astro.url.pathname enthält bei GH-Pages bereits den Repo-Pfad)
+const canonicalURL = new URL(Astro.url.pathname, siteUrl).href;
+
+// Bild-URL sicher zusammenbauen (verhindert Doppel-Slashes)
+const cleanImage = image.replace(/^\//, "");
+const resolvedImage = new URL(baseUrl + cleanImage, siteUrl).href;
+
+/**
+ * 2. TITEL & STATUS
+ */
+const formattedTitle = title
+   ? `${title} - Webdesign Firma`
+   : "Webdesign Firma - Professionelle Webdesign-Dienstleistungen";
+
+//TODO -  // ENTWICKLUNGS-MODUS: Auf 'false' setzen, wenn die Seite bei Google erscheinen soll!
+const isDev = true;
+
+/**
+ * 3. STRUKTURIERTE DATEN (JSON-LD)
+ * Wir definieren das Objekt hier oben in JavaScript.
+ */
+const schema = {
+   "@context": "https://schema.org",
+   "@type": "ProfessionalService",
+   name: "Webdesign Firma",
+   url: siteUrl + baseUrl,
+   image: resolvedImage,
+   description: description,
+   address: {
+      "@type": "PostalAddress",
+      streetAddress: "Musterstraße 1",
+      addressLocality: "Berlin",
+      postalCode: "10115",
+      addressCountry: "DE",
+   },
+};
+---
+
+<!-- Astro SEO Komponente -->
+<SEO
+   title={formattedTitle}
+   description={description}
+   noindex={isDev}
+   nofollow={isDev}
+   canonical={canonicalURL}
+   openGraph={{
+      basic: {
+         title: formattedTitle,
+         type: ogType,
+         image: resolvedImage,
+         url: canonicalURL,
+      },
+      optional: {
+         locale: "de_DE",
+         siteName: "Webdesign Firma",
+         description: description,
+      },
+   }}
+   twitter={{
+      card: "summary_large_image",
+      site: "@webdesignfirma",
+      title: formattedTitle,
+      description: description,
+      image: resolvedImage,
+   }}
+   extend={{
+      meta: [
+         { name: "theme-color", content: "#0056b3" },
+         { name: "author", content: "Webdesign Firma" },
+         { name: "viewport", content: "width=device-width, initial-scale=1" },
+         { name: "generator", content: Astro.generator },
+      ],
+      link: [
+         { rel: "icon", href: `${baseUrl}favicon.svg`, type: "image/svg+xml" },
+         { rel: "apple-touch-icon", href: `${baseUrl}apple-touch-icon.png` },
+      ],
+   }}
+/>
+
+<!-- 
+  JSON-LD für Google. 
+  set:html wandelt das JavaScript-Objekt oben in einen sauberen String um.
+-->
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
