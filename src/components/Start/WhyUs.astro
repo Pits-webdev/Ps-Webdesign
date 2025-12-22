@@ -2,9 +2,6 @@
 import { Image } from "astro:assets";
 
 import Handshake from "@assets/images/handshake.png";
-import MacBook_Mockup1 from "@assets/images/MacBook_Mockup1.png";
-import Mockup1 from "@assets/images/mockup/mockup-1.webp";
-import Mockup2 from "@assets/images/mockup/mockup-2.webp";
 import price from "@assets/images/payment.png";
 import Clock from "@assets/svg/clock.svg";
 import Email from "@assets/svg/mail.svg";
@@ -42,19 +39,19 @@ import Scale from "@assets/svg/scale.svg";
                </div>
 
                <div
-                  class="w-full h-full border border-border p-8 flex gap-5 items-center justify-center"
+                  class="w-full h-full border border-border p-8 flex gap-5 items-center justify-between"
                >
-                  <div>
-                     <Image src={Mockup1} alt="Maccbook" />
+                  <div class="space-y-4">
+                     <span class="inline-flex text-primary text-4xl">250+</span>
+                     <p>Durchgeführte Projekte</p>
                   </div>
-                  <div>
-                     <Image src={Mockup2} alt="Maccbook" />
+                  <div class="space-y-4">
+                     <span class="inline-flex text-primary text-4xl">70%</span>
+                     <p>Geschäftswachstum</p>
                   </div>
-                  <div>
-                     <Image src={Mockup1} alt="Maccbook" />
-                  </div>
-                  <div>
-                     <Image src={Mockup2} alt="Maccbook" />
+                  <div class="space-y-4">
+                     <span class="inline-flex text-primary text-4xl">99%</span>
+                     <p>Partnerschaft</p>
                   </div>
                </div>
             </div>

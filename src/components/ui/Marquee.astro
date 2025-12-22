@@ -22,41 +22,39 @@ const Icons = [
 ];
 
 const { direction = "toLeft" } = Astro.props;
-
-
 ---
 
-<div class="marquee-outer relative max-w-full select-none overflow-clip" 
-      data-direction={direction}>
+<div
+   class="marquee-outer relative max-w-full select-none overflow-clip"
+   data-direction={direction}
+>
+   <!-- Verlauf links -->
    <div
-      class="w-[120px] h-full absolute top-0 left-0 bg-linear-to-r from-background to-transparent z-10"
+      class="w-[120px] h-full absolute top-0 left-0 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"
    >
    </div>
+
+   <!-- Verlauf rechts -->
    <div
-      class="w-[120px] h-full absolute top-0 right-0 bg-linear-to-r from-transparent to-background z-10"
+      class="w-[120px] h-full absolute top-0 right-0 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"
    >
    </div>
 
    <div class="marquee-inner flex w-max will-change-transform">
-      <div
-         class="marquee-track flex shrink-0 gap-32 pl-32 whitespace-nowrap"
-         
-      >
+      <div class="marquee-track flex shrink-0 gap-32 pl-32 whitespace-nowrap">
          {
             Icons.map((Icon) => (
-               <div class="flex items-center justify-center"> <!-- Optionaler Wrapper für Icon Ausrichtung -->
+               <div class="flex items-center justify-center px-12 py-4 border border-border">
                   <Icon class="icon" />
                </div>
             ))
          }
       </div>
 
-      <div
-         class="marquee-track flex shrink-0 gap-32 pl-32 whitespace-nowrap"
-      >
+      <div class="marquee-track flex shrink-0 gap-32 pl-32 whitespace-nowrap">
          {
             Icons.map((Icon) => (
-               <div class="flex items-center justify-center"> <!-- Optionaler Wrapper für Icon Ausrichtung -->
+               <div class="flex items-center justify-center px-12 py-4 border border-border">
                   <Icon class="icon" />
                </div>
             ))
@@ -71,35 +69,37 @@ const { direction = "toLeft" } = Astro.props;
 
    gsap.registerPlugin(ScrollTrigger);
 
-   const marqueeElements = gsap.utils.toArray<HTMLElement>(".marquee-outer")
+   const marqueeElements = gsap.utils.toArray<HTMLElement>(".marquee-outer");
 
-   marqueeElements.forEach((element)=>{
-      const tracks = element.querySelectorAll(".marquee-track")
-
-      const direction = element.getAttribute("data-direction")
+   marqueeElements.forEach((element) => {
+      const tracks = element.querySelectorAll(".marquee-track");
+      const direction = element.getAttribute("data-direction");
 
       let speed = 30;
 
-      // Logik-Check:
-      // toRight: Startet bei -100% (links außen) und fährt auf 0% (Start)
-      // toLeft (else): Startet bei 0% und fährt auf -100%
+      // Logik: Läuft es nach links oder nach rechts?
+      // toRight: Startet bei -100% und fährt auf 0
+      // Standard: Startet bei 0 und fährt auf -100%
       const startX = direction === "toRight" ? -100 : 0;
       const endX = direction === "toRight" ? 0 : -100;
 
+      // Startposition setzen
       gsap.set(tracks, { xPercent: startX });
 
+      // Die Animation erstellen
       const tween = gsap.to(tracks, {
          xPercent: endX,
          duration: speed,
          ease: "none",
          repeat: -1,
-         paused: true // Warten auf ScrollTrigger
+         paused: true, // Startet erst mal pausiert
       });
 
+      // ScrollTrigger kümmert sich NUR noch um Play/Pause (Performance)
       ScrollTrigger.create({
          trigger: element,
-         start: "top bottom",
-         end: "bottom top",
+         start: "top bottom", // Wenn Oberkante des Elements in den Viewport kommt
+         end: "bottom top", // Wenn Unterkante des Elements den Viewport verlässt
          onToggle: (self) => {
             if (self.isActive) {
                tween.play();
@@ -107,20 +107,6 @@ const { direction = "toLeft" } = Astro.props;
                tween.pause();
             }
          },
-
-         // Richtungswechsel bei Scroll
-         onUpdate: (self) => {
-             // self.direction ist 1 (Runter) oder -1 (Hoch)
-             // Wir animieren den timeScale, damit der Wechsel weich ist,
-             // statt abrupt umzuschalten.
-             gsap.to(tween, { 
-                 timeScale: self.direction, 
-                 duration: 0.3, // Wie schnell reagiert er? (0.5s Übergang)
-                 overwrite: true 
-             });
-         }
       });
-   })
+   });
 </script>
-
- 
