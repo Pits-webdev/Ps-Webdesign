@@ -25,7 +25,6 @@ import Scale from "@assets/svg/scale.svg";
          </div>
       </div>
 
-      <!-- gallery -->
       <div class="grid grid-cols-3 ring ring-ring">
          <div class="bg-accent w-full h-full col-span-2 p-8">
             <div class="w-full h-full flex flex-col gap-y-10 justify-between">
@@ -39,18 +38,24 @@ import Scale from "@assets/svg/scale.svg";
                </div>
 
                <div
-                  class="w-full h-full border border-border p-8 flex gap-5 items-center justify-between"
+                  class="counter-wrapper w-full h-full border border-border p-8 flex gap-5 items-center justify-between"
                >
                   <div class="space-y-4">
-                     <span class="inline-flex text-primary text-4xl">250+</span>
+                     <span class="counter inline-flex text-primary text-4xl"
+                        >250+</span
+                     >
                      <p>Durchgeführte Projekte</p>
                   </div>
                   <div class="space-y-4">
-                     <span class="inline-flex text-primary text-4xl">70%</span>
+                     <span class="counter inline-flex text-primary text-4xl"
+                        >70%</span
+                     >
                      <p>Geschäftswachstum</p>
                   </div>
                   <div class="space-y-4">
-                     <span class="inline-flex text-primary text-4xl">99%</span>
+                     <span class="counter inline-flex text-primary text-4xl"
+                        >99%</span
+                     >
                      <p>Partnerschaft</p>
                   </div>
                </div>
@@ -188,7 +193,6 @@ import Scale from "@assets/svg/scale.svg";
             </div>
          </div>
 
-         <!-- last -->
          <div
             class="bg-primary border-l border-border grid grid-rows-[1fr_1px_1fr] gap-4"
          >
@@ -244,3 +248,46 @@ import Scale from "@assets/svg/scale.svg";
       </div>
    </div>
 </section>
+
+<script>
+   import gsap from "gsap";
+   import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+   gsap.registerPlugin(ScrollTrigger);
+
+   const counters = gsap.utils.toArray<HTMLElement>(".counter");
+
+   counters.forEach((counter) => {
+      // 1. Daten lesen
+      const originalText = counter.textContent || "";
+      const targetValue = parseFloat(originalText);
+
+      // Das Suffix (%, +) extrahieren
+      const suffix = originalText.replace(/[0-9.]/g, "");
+
+      // --- FIX HIER ---
+      // Vorher: counter.textContent = "0" + suffix;  -> ergab "0+" oder "0%"
+      // Neu: Wir setzen es einfach glatt auf "0".
+      counter.textContent = "0";
+
+      const countObj = { val: 0 };
+
+      ScrollTrigger.create({
+         trigger: ".counter-wrapper", // Trigger auf den Container
+         start: "top 80%",
+         once: true,
+         onEnter: () => {
+            gsap.to(countObj, {
+               val: targetValue,
+               duration: 2,
+               ease: "power2.out",
+               onUpdate: () => {
+                  // Während der Animation fügen wir das Suffix wieder hinzu
+                  // Ergebnis: 0 -> 1% -> 10% ... -> 70%
+                  counter.textContent = Math.round(countObj.val) + suffix;
+               },
+            });
+         },
+      });
+   });
+</script>
